@@ -68,20 +68,5 @@ Watch the video demonstrating how the analysis was conducted with Kinovea:
 
 ---
 
-## 🗂️ Project Structure
-```plaintext
-SAE_3.01/
-├── Code/
-├── Objectifs/
-├── Ressources/
-│   ├── E1/
-│   ├── E2/
-│   ├── E3/
-│   ├── E4/
-│       ├── Interface.png
-│       ├── POSTERFINI.png
-│       ├── presseanalyse.mp4
-│       ├── Resultat.png
-├── Bibliotheques.txt
-├── Commandes_Git.txt
-├── README.md
+### ✍️ Authors
+This project was carried out as part of a university project, in collaboration with my team. 
