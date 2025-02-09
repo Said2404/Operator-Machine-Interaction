@@ -62,9 +62,10 @@ Below are key visuals from the project:
 
 ---
 
-## 🎥 Streaming
-Watch the video demonstrating how the analysis was conducted with Kinovea:
+### 🎥 Video Demonstration
+Click the link below to access the video demonstration of the analysis process using **Kinovea**:
 
+[➡️ Watch the Video](https://said2404.github.io/Operator-Machine-Interaction/)
 
 ---
 
