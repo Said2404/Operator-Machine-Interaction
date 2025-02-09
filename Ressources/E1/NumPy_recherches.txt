@@ -1,0 +1,74 @@
+===> Présentation générale :
+
+NumPy est la bibliothèque fondamentale pour le calcul scientifique en Python. Elle fournit un objet tableau multidimensionnel (appelé ndarray), divers objets dérivés tels que des tableaux masqués et des matrices, ainsi qu'une vaste collection de routines optimisées pour des opérations rapides sur ces tableaux. Ces opérations incluent des calculs mathématiques, logiques, la manipulation de formes, le tri, la sélection, l'entrée/sortie de données, les transformées de Fourier, l'algèbre linéaire de base, les statistiques de base, les simulations aléatoires, et bien plus encore.
+
+===> Pourquoi NumPy est performant :
+
+I) Optimisation bas niveau : NumPy utilise des structures de données bas niveau, ce qui rend les calculs beaucoup plus rapides que ceux effectués avec les listes Python standard.
+   
+II) Vectorisation : Une des forces principales de NumPy est la possibilité de vectoriser les opérations. Cela signifie que des opérations élémentaires peuvent être appliquées sur des tableaux entiers sans recourir à des boucles explicites, ce qui améliore l'efficacité.
+
+Par exemple, additionner deux tableaux NumPy est bien plus rapide que d'additionner deux listes Python élément par élément. Cette vectorisation optimise les performances en utilisant directement les capacités du processeur.
+
+-> Utilité de NumPy dans la détection de poses :
+
+Bien que NumPy ne soit pas directement responsable de la détection des poses dans les applications de vision par ordinateur (On utilisera plutôt des bibliothèques comme OpenPose ou MediaPipe), il joue un rôle clé dans le traitement et l'analyse des données extraites après détection. Voici comment NumPy est utilisé dans ce cadre :
+
+1) Stockage et manipulation des données des points clés :
+   
+Après la détection des poses, on obtient un ensemble de points clés (coordonnées des articulations : épaules, coudes, poignets, etc...) pour chaque frame de la vidéo. Ces données sont souvent structurées sous forme de tableaux ou de matrices, et NumPy permet de :
+   
+- Stocker efficacement ces coordonnées sous forme de tableaux multidimensionnels.
+- Manipuler ces tableaux pour extraire des informations, telles que les variations de position des articulations dans le temps.
+
+2) Calcul des distances entre articulations :
+   
+NumPy simplifie les calculs de distances entre deux points, ce qui est essentiel pour mesurer les mouvements des articulations (par exemple, la distance entre l'épaule et le coude).
+
+   Exemple : 
+
+   import numpy as np
+   point1 = np.array([100, 200])  # coordonnée de l'épaule
+   point2 = np.array([150, 250])  # coordonnée du coude
+   distance = np.linalg.norm(point2 - point1)
+   print(f"Distance : {distance}")
+
+3) Calcul des angles entre articulations :
+   
+Dans certaines analyses de mouvements, il peut être nécessaire de suivre l'évolution des angles formés par les articulations. NumPy permet de calculer ces angles de manière efficace grâce aux produits scalaires et vectoriels.
+
+   Exemple de calcul d'angle entre épaule, coude, et poignet :
+
+   vecteur1 = épaule - coude
+   vecteur2 = poignet - coude
+   angle = np.arccos(np.dot(vecteur1, vecteur2) / (np.linalg.norm(vecteur1) * np.linalg.norm(vecteur2)))
+
+4) Filtrage et lissage des données :
+   
+Les données brutes obtenues à partir des algorithmes de détection de pose peuvent contenir des bruits ou des fluctuations indésirables. NumPy permet de lisser ces données en appliquant des filtres, tels que des moyennes mobiles ou des filtres gaussiens, pour obtenir une meilleure précision dans l’analyse des mouvements.
+
+   Exemple : Moyenne mobile pour lisser les données de mouvements :
+
+   mouvements = np.array([1, 2, 5, 7, 6, 3, 8])
+   smoothed_mouvements = np.convolve(mouvements, np.ones(3)/3, mode='valid')
+
+5) Statistiques et agrégation des données :
+   
+NumPy permet également de calculer des statistiques sur les mouvements détectés, comme le nombre total de mouvements, la moyenne des déplacements ou encore la durée moyenne d'une action technique. Cela permet d’obtenir un résumé clair des mouvements de l’opérateur.
+
+   Exemple : 
+
+   déplacements = np.array([10, 15, 20, 25])
+   total_mouvement = np.sum(déplacements)
+   moyenne_mouvement = np.mean(déplacements)
+   print(f"Total : {total_mouvement}, Moyenne : {moyenne_mouvement}")
+
+-> Conclusion :
+
+Bien que NumPy ne réalise pas directement la détection de poses, il est crucial pour analyser les données de mouvements une fois celles-ci extraites. Grâce à ses capacités de traitement rapide et efficace des données, NumPy permet :
+   
+- D'analyser les mouvements des articulations sur des centaines voire des milliers de frames.
+- De calculer rapidement des métriques importantes comme les distances, les angles, et les mouvements totaux.
+- De quantifier précisément les actions techniques réalisées par un opérateur lors d’une tâche.
+
+NumPy s'avère donc être un outil indispensable pour toute analyse approfondie des mouvements dans le cadre de la vision par ordinateur ou de la détection de poses.

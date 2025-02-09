@@ -1,0 +1,81 @@
+===> Présentation générale :
+
+Scikit-image est une bibliothèque Python dédiée au traitement et à l'analyse d'images. Basée sur NumPy, elle offre un ensemble d'outils pour effectuer diverses opérations sur des images, comme la segmentation, la transformation géométrique, la manipulation de couleur, l'extraction de caractéristiques, la détection de contours, et bien plus encore. Scikit-image est couramment utilisé dans les applications de vision par ordinateur et est adapté aussi bien pour des tâches de traitement d'images simples que pour des analyses plus complexes.
+
+===> Pourquoi Scikit-image est performant :
+
+I) Intégration avec NumPy : Scikit-image est entièrement construit sur NumPy, ce qui permet de manipuler facilement les images sous forme de tableaux multidimensionnels (ndarray). Cette intégration permet d’utiliser les fonctionnalités de traitement d'image tout en bénéficiant des optimisations offertes par NumPy.
+
+II) Large éventail de fonctions : La bibliothèque propose un grand nombre d'algorithmes de traitement d'images allant des plus simples (redimensionnement, filtrage) aux plus avancés (segmentation, analyse morphologique). Cela permet une flexibilité importante pour répondre à divers besoins d’analyse d’images.
+
+III) Facilité d’utilisation : Scikit-image est bien documenté et très simple d’utilisation, même pour les utilisateurs n’ayant pas une grande expérience en traitement d’images. La syntaxe est intuitive et permet d'effectuer des opérations complexes en quelques lignes de code.
+
+-> Utilité de Scikit-image dans la détection de poses :
+
+Scikit-image peut être utile dans le cadre de la détection de poses et du suivi des mouvements en complément des outils spécialisés comme OpenPose ou MediaPipe. Voici quelques manières dont il peut être utilisé :
+
+1) Prétraitement des images :
+   
+Avant d’effectuer une détection de pose, il est souvent nécessaire de prétraiter les images pour améliorer la précision des algorithmes de détection. Scikit-image permet d'appliquer des filtres (gaussiens, médians, etc...) pour réduire le bruit, améliorer le contraste, ou encore ajuster la luminosité. Ces opérations sont essentielles pour obtenir des images de meilleure qualité.
+
+   Exemple : Appliquer un filtre gaussien pour réduire le bruit dans une image.
+
+   from skimage import filters, io
+   image = io.imread('image.png')
+   image_filtered = filters.gaussian(image, sigma=1)
+   io.imsave('image_filtered.png', image_filtered)
+
+2) Détection de contours et extraction de caractéristiques :
+   
+Pour certaines analyses de mouvements, détecter les contours des objets ou des articulations dans l'image est essentiel. Scikit-image propose des outils puissants pour la détection de contours, l'extraction d'arêtes ou de caractéristiques importantes, qui peuvent aider à identifier les points clés sur une articulation ou un membre.
+
+   Exemple : Détection des contours avec l’algorithme de Canny.
+
+   from skimage import feature, io
+   image = io.imread('image.png', as_gray=True)
+   contours = feature.canny(image, sigma=3)
+   io.imsave('contours.png', contours)
+
+3) Transformation et redimensionnement d'images :
+   
+Dans le cas où les images sont prises sous différents angles ou tailles, Scikit-image permet de les transformer ou redimensionner pour qu'elles puissent être traitées de manière uniforme. Cela inclut la rotation, le redimensionnement, ou même la correction de la distorsion.
+
+   Exemple : Redimensionner une image.
+
+   from skimage.transform import resize
+   image_resized = resize(image, (512, 512))
+   io.imsave('image_resized.png', image_resized)
+
+4) Segmentation d’images :
+   
+La segmentation consiste à diviser une image en plusieurs parties ou segments, en se basant sur les différences de couleur, de texture ou d'intensité lumineuse. Cela permet d'isoler les différentes parties du corps (par exemple, le bras, la jambe, etc...) pour mieux analyser les mouvements.
+
+   Exemple : Segmentation par seuil.
+
+   from skimage import filters
+   thresh = filters.threshold_otsu(image)
+   binary = image > thresh
+   io.imsave('segmented.png', binary)
+
+5) Calcul de mesures sur les objets détectés :
+   
+Une fois que les objets (ou les articulations) ont été détectés, Scikit-image peut être utilisé pour calculer différentes mesures comme la surface, la forme, ou la position des objets dans l’image. Ces données sont essentielles pour analyser les mouvements et définir les actions techniques.
+
+   Exemple : Calculer les propriétés des régions segmentées.
+
+   from skimage.measure import label, regionprops
+   label_img = label(binary)
+   regions = regionprops(label_img)
+   for region in regions:
+       print(f"Surface : {region.area}, Centroid : {region.centroid}")
+
+-> Conclusion :
+
+Bien que Scikit-image ne soit pas une bibliothèque spécialisée dans la détection de poses, elle est un outil précieux pour le prétraitement et l'analyse des images avant et après la détection des poses. En particulier, elle permet :
+
+- D'améliorer la qualité des images pour les rendre plus faciles à analyser.
+- De détecter des contours, des objets ou des régions dans les images.
+- D'effectuer des transformations pour uniformiser les images.
+- De calculer des statistiques sur les objets détectés, afin d'obtenir une meilleure compréhension des mouvements.
+
+Ainsi, Scikit-image peut jouer un rôle important dans la préparation et l’analyse des images dans les projets de détection de poses ou de suivi des mouvements.

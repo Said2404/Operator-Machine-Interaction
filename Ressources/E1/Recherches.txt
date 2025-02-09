@@ -1,0 +1,21 @@
+OpenCV : Traitement vidéo et détection des mouvements de base
+
+OpenPose : Détecte les points clés du corps humain à chaque frame de la vidéo. Il permet de suivre les mouvements des bras, des coudes, des épaules.
+
+MediaPipe : Détection des poses. Il est plus léger et facile à intégrer qu'OpenPose, et il fournit également des coordonnées pour les différentes parties du corps.
+
+NumPy : Pour manipuler et analyser les données de mouvements. NumPy est la bibliothèque fondamentale pour le calcul scientifique en Python. Il s'agit d'une bibliothèque qui fournit un objet tableau multidimensionnel, divers objets dérivés (tels que des tableaux masqués et des matrices), ainsi qu'un ensemble de routines pour des opérations rapides sur les tableaux, y compris des opérations mathématiques, logiques, de manipulation de forme, de tri, de sélection, d'entrées/sorties, de transformées de Fourier discrètes, d'algèbre linéaire de base, d'opérations statistiques de base, de simulations aléatoires, et bien plus encore.
+NumPy est optimisé pour la performance. Il utilise des structures de données bas niveau pour rendre les calculs beaucoup plus rapides que l'utilisation des listes Python standard. De plus, il est possible de vectoriser les opérations, c'est-à-dire d'appliquer des opérations élémentaires à des tableaux entiers sans boucles explicites, ce qui est beaucoup plus efficace.
+Par exemple, additionner deux tableaux NumPy est bien plus rapide que d'additionner deux listes Python élément par élément.
+NumPy peut être extrêmement utile pour la détection de poses dans des applications de vision par ordinateur, même s'il n'est pas directement utilisé pour la détection des poses (c'est généralement fait par des bibliothèques comme OpenPose ou MediaPipe). Cependant, NumPy joue un rôle clé dans le traitement et l'analyse des données extraites des points clés des articulations après la détection des poses.
+Après la détection des poses, on obtient un ensemble de points clés (coordonnées des articulations : épaules, coudes, poignets, etc...) pour chaque frame de la vidéo. Ces coordonnées sont généralement sous forme de tableaux ou de matrices, et NumPy peut être utilisé pour :
+- Stocker les coordonnées des points clés dans des tableaux multidimensionnels.
+- Manipuler ces tableaux pour extraire des informations pertinentes, telles que les changements de position des articulations au fil du temps.
+Si on a besoin de calculer la distance entre deux points (ce qui sera utile si on veut connaitre la distance entre deux articulations, ou alors la distance parcourue par une même articulation entre plusieurs frames) cela se fait très facilement et efficacement, de même si on a besoin de calculer l'angle entre plusieurs articulations. NumPy sera également très utile si on a besoin de supprimer les "bruits" dans les données obtenues, en nous permettant de lisser les trajectoires ainsi qu'appliquer des filtres pour éliminer les fluactuations indésirables (en utilisant un filtre gaussien par exemple). Pour résumer, même s'il n'a strictement rien à voir avec la detection de poses en elle-même, NumPy sera crucial pour :
+- Analyser les mouvements après la détection des poses
+- Effectuer des calculs mathématiques rapides sur les coordonnées des articulations
+- Quantifier les mouvements et définir des actions techniques
+
+Panda : 
+
+Mieux vaut partir sur du Python.

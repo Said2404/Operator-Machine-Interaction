@@ -1,0 +1,42 @@
+===> Présentation générale :
+
+MediaPipe est une bibliothèque développée par Google qui fournit des solutions pour l’analyse de vidéos et de flux d'images en temps réel. Elle est particulièrement puissante pour la détection de poses et d'autres tâches de vision par ordinateur comme la détection de visages, la reconnaissance de gestes, le suivi des mains, etc. Contrairement à des approches qui nécessitent d’entraîner des modèles à partir de zéro, MediaPipe offre des solutions prêtes à l'emploi, optimisées et faciles à utiliser.
+
+===> Fonctionnement de MediaPipe pour la détection des poses :
+
+I) Modèle de détection de poses :
+
+	MediaPipe utilise un modèle de machine learning capable de détecter des points clés (landmarks) sur le corps humain. Ces points clés représentent les articulations principales, comme les épaules, les coudes, les genoux, les poignets, etc. Le modèle est conçu pour fonctionner en temps réel et est très performant même sur des appareils avec des ressources limitées.
+
+II) Processus de fonctionnement général :
+
+	Extraction d'image de la vidéo : MediaPipe extrait des images individuelles d'une vidéo, comme celles provenant d'une vidéo YouTube.
+
+	Détection de la silhouette humaine : Le modèle détecte la silhouette générale d'une personne dans l'image, en identifiant si une ou plusieurs personnes sont présentes.
+
+	Identification des points clés (landmarks) : MediaPipe localise jusqu'à 33 points clés du corps humain, incluant les épaules, les coudes, les genoux, les chevilles, et d'autres articulations.
+
+	Tracking temporel : En plus de détecter les poses dans des images individuelles, MediaPipe peut suivre les points clés au fil des frames de la vidéo, assurant une continuité dans le temps.
+
+-> Utilisation de MediaPipe pour détecter les poses dans une vidéo YouTube :
+	Pour détecter les poses dans une vidéo YouTube, il faut d'abord télécharger ou extraire la vidéo, ou capturer le flux vidéo en temps réel, puis utiliser MediaPipe pour analyser les frames (images) extraites de la vidéo.
+
+=> Étapes générales pour la détection de pose avec MediaPipe sur une vidéo YouTube :
+
+1) Téléchargement ou capture de la vidéo YouTube :
+
+	Télécharger la vidéo en utilisant des outils comme youtube-dl ou une API qui permet d’extraire les vidéos.
+	Alternativement, si c'est un flux en direct, capturer directement les frames de la vidéo.
+
+2) Installation de MediaPipe et OpenCV :
+	Installer MediaPipe (pip install mediapipe) et OpenCV (pip install opencv-python) pour le traitement des frames et la détection des poses.
+
+3) Traitement de la vidéo et détection des poses :
+	Lire la vidéo et traiter chaque frame en détectant les poses à l'aide de MediaPipe.
+
+4) Affichage ou enregistrement des résultats :
+	Afficher les résultats en temps réel ou créer une vidéo annotée avec les points clés des poses détectées.
+
+-> Conclusion :
+
+MediaPipe est un outil puissant et accessible pour la détection de poses en temps réel dans des vidéos. Sa simplicité d'utilisation, combinée à son efficacité, en fait un excellent choix pour les développeurs souhaitant intégrer des fonctionnalités de vision par ordinateur sans devoir entraîner des modèles à partir de zéro.

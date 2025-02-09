@@ -1,0 +1,42 @@
+===> Présentation générale :
+
+OpenPose est une bibliothèque open-source développée par le Carnegie Mellon Perceptual Computing Lab. Elle est utilisée pour la détection de poses humaines à partir de vidéos ou d'images. Contrairement à MediaPipe, OpenPose se concentre principalement sur la détection précise des points clés (landmarks) du corps, des mains et du visage. C'est l'une des solutions les plus robustes pour la détection multi-personnes en temps réel, ce qui en fait un choix populaire pour des applications de vision par ordinateur dans les domaines de la santé, du sport, et de la réalité augmentée.
+
+===> Fonctionnement d'OpenPose :
+
+OpenPose détecte les articulations humaines en identifiant des points clés sur le corps, les mains, le visage et les pieds. Il utilise un modèle de réseau de neurones convolutifs (CNN) pour détecter ces points à partir d'images ou de vidéos. Une des forces d'OpenPose est sa capacité à détecter plusieurs personnes en même temps tout en maintenant une grande précision.
+
+-> Types de détection fournis par OpenPose :
+
+1) Pose du corps entier :
+	OpenPose détecte 25 points clés sur le corps humain, incluant les articulations comme les épaules, coudes, hanches, genoux, chevilles, etc.
+
+2) Détection des mains :
+	Il est capable de détecter 21 points clés sur chaque main, permettant de suivre précisément les mouvements des doigts et des articulations des mains.
+
+3) Détection des visages :
+	OpenPose peut détecter des points spécifiques sur le visage, incluant les contours des yeux, de la bouche, et du nez, offrant une analyse détaillée des expressions faciales.
+
+4) Détection multi-personnes :
+	Une des fonctionnalités remarquables d'OpenPose est sa capacité à détecter et suivre plusieurs personnes simultanément dans une même image ou vidéo.
+
+-> Utilisation d'OpenPose pour détecter les poses dans une vidéo YouTube :
+	L'utilisation d'OpenPose pour détecter les poses dans une vidéo YouTube suit un processus similaire à celui de MediaPipe. Voici les étapes à suivre :
+
+=> Étapes pour la détection de poses avec OpenPose sur une vidéo YouTube :
+
+1) Téléchargement de la vidéo YouTube :
+	Télécharger la vidéo en utilisant un outil comme youtube-dl ou une API dédiée.
+
+2) Installation d'OpenPose :
+	OpenPose nécessite des bibliothèques spécifiques comme CUDA (pour l'accélération GPU), Caffe, ou PyTorch pour le modèle de deep learning. Il est nécessaire de télécharger et installer OpenPose en suivant les instructions disponibles sur le dépôt GitHub officiel d'OpenPose.
+
+3) Chargement et traitement de la vidéo :
+	Une fois la vidéo téléchargée, chaque frame de la vidéo est analysée avec OpenPose pour détecter les poses. L'analyse se fait en temps réel ou sur des frames extraites de la vidéo.
+
+4) Affichage ou enregistrement des résultats :
+	Les points clés détectés peuvent être superposés sur la vidéo et affichés en temps réel, ou une nouvelle vidéo annotée avec les points clés peut être enregistrée.
+
+===> Conclusion :
+
+OpenPose est une solution puissante pour la détection précise des poses humaines, offrant des fonctionnalités avancées pour la détection du corps, des mains, et du visage, ainsi que pour la détection multi-personnes. Grâce à sa robustesse et sa précision, il est largement utilisé dans les applications de vision par ordinateur qui nécessitent une analyse fine des mouvements humains.

@@ -1,0 +1,78 @@
+===> Présentation générale :
+
+Mahotas est une bibliothèque Python dédiée au traitement d'images. Comme Scikit-image, elle est construite sur NumPy et se concentre sur l'exécution rapide d'opérations de traitement d'images, en particulier pour les calculs numériques intensifs. Mahotas offre plus de 100 fonctions pour effectuer des tâches comme la segmentation, la classification, la transformation d'images, ou encore le filtrage. Elle est souvent utilisée dans le domaine de la vision par ordinateur et de l'analyse d'images biomédicales, là où la rapidité d'exécution est cruciale.
+
+===> Pourquoi Mahotas est performant :
+
+I) Implémentation en C++ : Les fonctions de Mahotas sont implémentées en C++ pour des performances accrues, ce qui lui permet d’être extrêmement rapide et efficace, surtout lorsqu'il s'agit de traiter de grandes quantités de données d'images.
+
+II) Simplicité d'utilisation : Mahotas fournit une interface simple et directe pour utiliser des algorithmes complexes. Cela la rend accessible même aux utilisateurs ayant peu d'expérience avec les algorithmes de traitement d'images avancés.
+
+III) Algorithmes spécialisés : Mahotas propose des outils spécifiques pour certaines applications complexes de traitement d’images, comme la segmentation par la méthode de Watershed ou l’algorithme de filtrage de Haralick pour les textures, ce qui la distingue des autres bibliothèques.
+
+-> Utilité de Mahotas dans la détection de poses :
+
+Mahotas n'est pas conçue spécifiquement pour la détection de poses, mais elle peut être utilisée pour préparer et analyser les images après détection. Voici quelques fonctionnalités pertinentes pour ce domaine :
+
+1) Prétraitement des images :
+
+Avant d’utiliser un modèle de détection de poses, il est souvent nécessaire de préparer les images. Mahotas propose divers filtres pour réduire le bruit ou améliorer les caractéristiques visuelles des images, facilitant ainsi la détection des points clés par d'autres bibliothèques.
+
+   Exemple : Appliquer un filtre gaussien pour lisser l'image.
+
+   import mahotas as mh
+   image = mh.imread('image.png', as_grey=True)
+   image_filtered = mh.gaussian_filter(image, 2)
+   mh.imsave('image_filtered.png', image_filtered)
+
+2) Segmentation d'images :
+
+Mahotas excelle dans la segmentation d’images, une tâche cruciale pour isoler des objets ou des parties du corps dans une image. Ces segments peuvent être utilisés pour extraire des informations sur les articulations ou les membres dans le cadre de la détection de poses.
+
+   Exemple : Utiliser la méthode Watershed pour segmenter une image.
+
+   T = mh.thresholding.otsu(image)
+   labeled, _ = mh.label(image > T)
+   watershed_result = mh.cwatershed(image.max() - image, labeled)
+   mh.imsave('segmented.png', watershed_result)
+
+3) Extraction de caractéristiques :
+
+Mahotas permet d'extraire des caractéristiques spécifiques d'une image, comme des textures ou des formes, qui peuvent être utiles pour détecter des points clés sur les articulations ou mesurer les mouvements des membres.
+
+   Exemple : Extraction de caractéristiques de texture avec l'algorithme de Haralick.
+
+   textures = mh.features.haralick(image)
+   print(textures.mean(axis=0))
+
+4) Calcul de distances et de mesures sur des objets :
+
+Après avoir segmenté ou détecté des objets (par exemple, des membres ou des articulations), Mahotas permet de calculer des mesures importantes comme les distances, les surfaces ou les formes. Ces informations sont essentielles pour analyser les mouvements et quantifier les actions réalisées.
+
+   Exemple : Calculer la distance entre deux points dans une image segmentée.
+
+   import numpy as np
+   point1 = np.array([100, 150])
+   point2 = np.array([200, 250])
+   distance = np.linalg.norm(point2 - point1)
+   print(f"Distance : {distance}")
+
+5) Transformation géométrique :
+
+Mahotas propose également des outils pour appliquer des transformations géométriques aux images, comme la rotation ou la mise à l'échelle. Cela peut être utile pour normaliser les images avant de les traiter ou de les analyser.
+
+   Exemple : Rotation d’une image.
+
+   rotated_image = mh.rotate(image, angle=45)
+   mh.imsave('rotated_image.png', rotated_image)
+
+-> Conclusion :
+
+Mahotas est une bibliothèque rapide et efficace pour le traitement et l'analyse d'images. Bien qu'elle ne soit pas dédiée à la détection de poses, elle offre des outils utiles pour :
+
+- Le prétraitement d'images avant une détection de pose.
+- La segmentation d'objets ou de parties du corps pour les analyses de mouvements.
+- L'extraction de caractéristiques visuelles essentielles à la détection des points clés.
+- Le calcul rapide de distances et de mesures sur des objets ou des articulations.
+
+Grâce à ses performances optimisées et à ses algorithmes spécialisés, Mahotas est un excellent choix pour toute application nécessitant une analyse rapide et précise des images, y compris dans le cadre d'une détection de poses ou d’une analyse des mouvements.

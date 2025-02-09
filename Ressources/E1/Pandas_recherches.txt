@@ -1,0 +1,90 @@
+===> Présentation générale :
+
+Pandas est une bibliothèque open-source très populaire pour la manipulation et l'analyse de données en Python. Elle permet de travailler facilement avec des données structurées et tabulaires, comme celles contenues dans des fichiers CSV, Excel, ou des bases de données SQL, ainsi que des données extraites de diverses API. Pandas fournit des structures de données appelées DataFrame et Series qui facilitent les opérations de filtrage, de regroupement, de manipulation et d'analyse des données.
+
+===> Pourquoi Pandas est performant :
+
+I) DataFrame : Pandas repose principalement sur l'objet DataFrame, une structure de données bidimensionnelle (similaire à une feuille de calcul Excel ou une table SQL) qui permet de stocker et manipuler de grandes quantités de données de manière efficace.
+
+II) Manipulation des données en masse : Pandas permet de filtrer, trier, agréger, et transformer les données avec des opérations simples, tout en gérant des volumes de données importants.
+
+Par exemple, il est facile d'additionner des colonnes entières, de filtrer des lignes basées sur des critères spécifiques, ou d’effectuer des calculs sur des groupes de données.
+
+-> Utilité de Pandas dans la détection de poses :
+
+Bien que Pandas ne soit pas directement impliqué dans la détection des poses, il devient un outil extrêmement utile pour organiser, nettoyer et analyser les données après leur extraction. Dans les projets de vision par ordinateur, une fois que les poses sont détectées, Pandas peut être utilisé pour :
+
+1) Organisation des données des points clés dans des DataFrames :
+
+Les données des poses (points clés des articulations comme les épaules, les coudes, les poignets, etc...) sont souvent présentées sous forme de tableaux avec des coordonnées pour chaque frame vidéo. Ces données peuvent facilement être stockées dans un DataFrame Pandas pour faciliter la manipulation.
+
+   Exemple :
+
+   import pandas as pd
+
+   data = {
+       "frame": [1, 2, 3, 4],
+       "épaule_x": [100, 102, 105, 107],
+       "épaule_y": [200, 198, 196, 195],
+       "coude_x": [150, 152, 155, 157],
+       "coude_y": [250, 248, 246, 245]
+   }
+
+   df = pd.DataFrame(data)
+   print(df)
+
+2) Nettoyage et traitement des données :
+
+Les données issues de la détection des poses peuvent contenir des valeurs erronées, des valeurs manquantes, ou des bruits. Pandas offre des fonctionnalités puissantes pour nettoyer ces données :
+
+- Remplacer les valeurs manquantes (ex. : NaN).
+- Filtrer les valeurs aberrantes.
+- Appliquer des transformations spécifiques (normalisation, mise à l’échelle, etc...).
+
+   Exemple : Remplir les valeurs manquantes par interpolation linéaire :
+
+   df.interpolate(method='linear', inplace=True)
+
+3) Analyse des mouvements au fil du temps :
+
+Les DataFrames Pandas permettent d'analyser les changements de coordonnées des articulations au fil des frames vidéo. On peut ainsi calculer la vitesse et la trajectoire des mouvements.
+
+   Exemple : Calcul de la différence entre deux frames pour détecter les mouvements :
+
+   df['delta_épaule_x'] = df['épaule_x'].diff()
+   df['delta_épaule_y'] = df['épaule_y'].diff()
+
+4) Groupement et agrégation des données :
+
+Pandas offre la possibilité de regrouper les données par catégories et d'appliquer des opérations d'agrégation (moyenne, somme, minimum, maximum, etc.). Dans le cas de la détection des poses, cela peut être utile pour regrouper les mouvements par types (par exemple, différents types d’actions techniques).
+
+   Exemple : Calculer la moyenne des positions par groupe de frames pour lisser les mouvements :
+
+   df.groupby('frame').mean()
+
+5) Calculs statistiques et quantification des mouvements :
+
+Avec Pandas, il est facile d'effectuer des calculs statistiques sur les données des mouvements extraits. Cela permet de quantifier les actions techniques de l'opérateur en calculant des métriques comme :
+
+- Le nombre total d'actions techniques réalisées.
+- La distance parcourue par une articulation.
+- Les angles moyens entre articulations sur plusieurs frames.
+
+   Exemple : Calculer la distance parcourue par l’épaule sur toutes les frames :
+   
+   df['distance_épaule'] = (df['delta_épaule_x']**2 + df['delta_épaule_y']**2)**0.5
+   distance_totale = df['distance_épaule'].sum()
+   print(f"Distance totale de l'épaule : {distance_totale}")
+
+6) Fusion de plusieurs sources de données :
+
+Pandas permet aussi de fusionner plusieurs sources de données pour enrichir l'analyse. Par exemple, on peut combiner les données des points clés avec d'autres sources comme les temps d’exécution des actions ou des annotations manuelles.
+
+-> Conclusion :
+
+Bien que Pandas ne soit pas directement lié à la détection des poses, il est indispensable pour l’analyse et la gestion des données extraites après la détection. En offrant une flexibilité pour organiser, nettoyer, et manipuler des volumes de données importants, Pandas devient un outil essentiel dans les projets de vision par ordinateur. Voici pourquoi Pandas est crucial dans ce contexte :
+
+- Il permet de structurer efficacement les coordonnées des articulations.
+- Il facilite le nettoyage et la préparation des données.
+- Il aide à effectuer des calculs statistiques et à quantifier les mouvements techniques.
+- Il permet de fusionner les données de diverses sources pour une analyse plus riche et complète.

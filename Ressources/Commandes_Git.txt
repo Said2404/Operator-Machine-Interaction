@@ -1,0 +1,24 @@
+Liste des commandes à utiliser si vous avez besoin d'aide :
+
+	git status
+Toujours faire cette commande en premier, permet de vérifier que le dépôt local (le dossier du git sur votre ordi) est à jour avec le dépôt distant (dépôt sur GitHub).
+
+	git add chemin/vers/le/fichier.extension
+	git add .
+Permet d'ajouter les fichiers modifiés à la zone de staging. Avec "git add ." vous ajoutez tous les fichiers nouveaux ou modifiés, avec "git add chemin/vers/le/fichier.extension" vous ajoutez uniquement le fichier sélectionné.
+
+	git commit -m "Message du commit"
+Fais un commit qui permet d'enregistrer les modifications sur le dépôt local.
+
+	git pull
+Récupère les modifications du dépôt distant et les intègre dans le dépôt local. Si un fichier modifié sur votre dépôt local et également modifié sur le dépôt distant, cela créera un conflit, rien de grave, mais il faut le résoudre. Concrètement cela signifie que git va automatiquement rendre visibles les modifications présentes sur votre dépôt mais pas sur le git, et importer les modifications présentes sur le git mais pas sur votre dépôt (et les rendre visibles aussi). Vous devrez alors décider de quoi faire, garder votre version, celle du dépôt, ou faire un peu un mélange des deux, en modifiant vous-même le fichier. Il faudra alors l'add à nouveau, et refaire un commit afin de valider la résolution des conflits.
+
+	git push
+Pousse les modifications du dépôt local vers le dépôt distant. Faites toujours un "git status" avant de push. Si c'est le premier push du dépôt vous devrez faire la commande "git push -u origin main" afin de définir la branche de suivi, main étant le nom de la branche.
+
+En résumé dans un cas classique d'utilisation :
+	git status
+	git add .
+	git commit -m "Message"
+	git pull (si votre dépôt local n'est pas à jour)
+	git push
